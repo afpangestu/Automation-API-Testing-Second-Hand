@@ -47,7 +47,7 @@ public class AuthEndpoints {
                 .post(url);
         response.then().log().body();
         JsonPath res = response.jsonPath();
-        if (res.get("user.email") != authItem.getEmail()) { // if email not exists
+        if (res.get("user.email") != authItem.getEmail() && res.get("user.email") != null) { // if email not exists
             Assert.assertEquals(res.get("user.name"), authItem.getName());
             Assert.assertEquals(response.getStatusCode(), 200);
         } else {
