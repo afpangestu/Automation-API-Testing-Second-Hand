@@ -8,6 +8,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ProductEndpoints {
@@ -25,16 +27,19 @@ public class ProductEndpoints {
 
     @Test
     public void postProduct() {
-        File img = new File("src/test/resources/image/klepon1.png");
+        File img1 = new File("src/test/resources/image/klepon1.png");
+        File img2 = new File("src/test/resources/image/garuda biru.jpg");
+
         String url = getValue().getString("postProductUrl");
         Response response = RestAssured.given()
                 .filter(authen.getSession())
-                .multiPart("product[name]", "Product xyz")
+                .multiPart("product[name]", "Product xyz array")
                 .multiPart("product[price]", "20000")
                 .multiPart("product[description]", "Ini deskripsi produk")
                 .multiPart("product[status]", "published")
                 .multiPart("product[category_id]", 1)
-                .multiPart("product[images][]", img)
+                .multiPart("product[images][]", img1)
+                .multiPart("product[images][]", img2)
                 .when()
                 .post(url);
         response.then().log().body();
