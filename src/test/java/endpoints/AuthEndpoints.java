@@ -16,8 +16,8 @@ import java.util.ResourceBundle;
 public class AuthEndpoints {
     User user;
     Auth auth;
-    static String cookie;
     CookieFilter filter;
+
     // get value from properties file
     static ResourceBundle getValue() {
         return ResourceBundle.getBundle("routes");
