@@ -1,14 +1,14 @@
 package pojo;
 
 public class Offer{
-	private Offer offer;
+	private OfferItem offerItem;
 
 
-	public void setOffer(Offer offer){
-		this.offer = offer;
+	public void setOffer(OfferItem offerItem){
+		this.offerItem = offerItem;
 	}
 
-	public Offer getOffer(){
-		return offer;
+	public OfferItem getOffer(){
+		return offerItem;
 	}
 }
