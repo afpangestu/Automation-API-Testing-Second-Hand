@@ -2,8 +2,8 @@ package endpoints;
 
 import auth.Authentication;
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 
 public class ProductEndpoints {
     Authentication auth;
+    int product_id;
 
     // get value from properties file
     static ResourceBundle getValue() {
@@ -42,6 +43,8 @@ public class ProductEndpoints {
                 .when()
                 .post(url);
         response.then().log().body();
+        JsonPath jP = response.jsonPath();
+        product_id = jP.getInt("product.id");
         Assert.assertEquals(response.getStatusCode(), 201);
     }
 
@@ -59,7 +62,7 @@ public class ProductEndpoints {
     public void getProductbyId() {
         String url = getValue().getString("getProductByIdUrl");
         Response response = RestAssured.given()
-                .pathParam("id", 136451)
+                .pathParam("id", product_id)
                 .get(url);
         response.then().log().body();
         Assert.assertEquals(response.getStatusCode(), 200);
@@ -67,20 +70,29 @@ public class ProductEndpoints {
 
     @Test(priority = 4)
     public void updateProduct() {
-        File img1 = new File("src/test/resources/image/klepon1.png");
-        File img2 = new File("src/test/resources/image/garuda biru.jpg");
+        File img = new File("src/test/resources/image/gorengan.jpg");
 
-        String url = getValue().getString("updateProductUrl");
+        String url = getValue().getString("update ProductUrl");
         Response response = RestAssured.given()
-                .pathParam("id", 136469)
+                .pathParam("id", product_id)
                 .filter(auth.getSession())
                 .multiPart("product[name]", "updatecProduct xyz yihii")
                 .multiPart("product[price]", "50000")
                 .multiPart("product[description]", "Ini deskripsi produk")
                 .multiPart("product[status]", "published")
                 .multiPart("product[category_id]", 1)
-                .multiPart("product[images][]", img2)
+                .multiPart("product[images][]", img)
                 .put(url);
+        response.then().log().body();
+        Assert.assertEquals(response.getStatusCode(), 200);
+    }
+
+    @Test(priority = 5)
+    public void deleteProduct() {
+        String url = getValue().getString("deleteProductUrl");
+        Response response = RestAssured.given()
+                .pathParam("id", product_id)
+                .get(url);
         response.then().log().body();
         Assert.assertEquals(response.getStatusCode(), 200);
     }
