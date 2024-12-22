@@ -8,13 +8,13 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pojo.Auth;
-import pojo.User;
+import pojo.AuthItem;
 
 import java.io.File;
 import java.util.ResourceBundle;
 
 public class AuthEndpoints {
-    User user;
+    AuthItem authItem;
     Auth auth;
     CookieFilter filter;
 
@@ -26,12 +26,12 @@ public class AuthEndpoints {
     @BeforeClass
     public void setup() {
         filter = new CookieFilter();
-        user = new User();
-        user.setName("aji f p");
-        user.setEmail("ajimail@mail.com");
-        user.setPassword("ajifp123");
+        authItem = new AuthItem();
+        authItem.setName("aji f p");
+        authItem.setEmail("ajimail@mail.com");
+        authItem.setPassword("ajifp123");
         auth = new Auth();
-        auth.setUser(user);
+        auth.setUser(authItem);
     }
 
     @Test(priority = 1)

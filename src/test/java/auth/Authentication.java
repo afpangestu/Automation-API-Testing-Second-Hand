@@ -6,12 +6,12 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import pojo.Auth;
-import pojo.User;
+import pojo.AuthItem;
 
 import java.util.ResourceBundle;
 
 public class Authentication {
-    User user;
+    AuthItem authItem;
     Auth auth;
 
     // get value from properties file
@@ -22,12 +22,12 @@ public class Authentication {
     public CookieFilter getSession() {
         CookieFilter filter = new CookieFilter();
 
-        user = new User();
-        user.setName("aji f p");
-        user.setEmail("ajimail@mail.com");
-        user.setPassword("ajifp123");
+        authItem = new AuthItem();
+        authItem.setName("aji f p");
+        authItem.setEmail("ajimail@mail.com");
+        authItem.setPassword("ajifp123");
         auth = new Auth();
-        auth.setUser(user);
+        auth.setUser(authItem);
 
         String url = getValue().getString("userLoginUrl");
 

@@ -1,13 +1,13 @@
 package pojo;
 
 public class Auth{
-	private User user;
+	private AuthItem authItem;
 
-	public void setUser(User user){
-		this.user = user;
+	public void setUser(AuthItem authItem){
+		this.authItem = authItem;
 	}
 
-	public User getUser(){
-		return user;
+	public AuthItem getUser(){
+		return authItem;
 	}
 }

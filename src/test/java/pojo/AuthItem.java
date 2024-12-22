@@ -1,6 +1,6 @@
 package pojo;
 
-public class User{
+public class AuthItem {
 	private String password;
 	private String name;
 	private String email;
