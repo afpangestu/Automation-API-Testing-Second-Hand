@@ -55,12 +55,32 @@ public class ProductEndpoints {
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void getProductbyId() {
         String url = getValue().getString("getProductByIdUrl");
         Response response = RestAssured.given()
                 .pathParam("id", 136451)
                 .get(url);
+        response.then().log().body();
+        Assert.assertEquals(response.getStatusCode(), 200);
+    }
+
+    @Test(priority = 4)
+    public void updateProduct() {
+        File img1 = new File("src/test/resources/image/klepon1.png");
+        File img2 = new File("src/test/resources/image/garuda biru.jpg");
+
+        String url = getValue().getString("updateProductUrl");
+        Response response = RestAssured.given()
+                .pathParam("id", 136469)
+                .filter(auth.getSession())
+                .multiPart("product[name]", "updatecProduct xyz yihii")
+                .multiPart("product[price]", "50000")
+                .multiPart("product[description]", "Ini deskripsi produk")
+                .multiPart("product[status]", "published")
+                .multiPart("product[category_id]", 1)
+                .multiPart("product[images][]", img2)
+                .put(url);
         response.then().log().body();
         Assert.assertEquals(response.getStatusCode(), 200);
     }
