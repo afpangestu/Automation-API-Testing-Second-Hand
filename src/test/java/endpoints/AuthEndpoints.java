@@ -3,6 +3,7 @@ package endpoints;
 import io.restassured.RestAssured;
 import io.restassured.filter.cookie.CookieFilter;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -45,7 +46,13 @@ public class AuthEndpoints {
                 .when()
                 .post(url);
         response.then().log().body();
-        Assert.assertEquals(response.getStatusCode(), 200);
+        JsonPath res = response.jsonPath();
+        if (res.get("user.email") != authItem.getEmail()) { // if email not exists
+            Assert.assertEquals(res.get("user.name"), authItem.getName());
+            Assert.assertEquals(response.getStatusCode(), 200);
+        } else {
+            Assert.assertEquals(res.get("errors.email[0]"), "has already been taken");
+        }
     }
 
     @Test(priority = 2)
