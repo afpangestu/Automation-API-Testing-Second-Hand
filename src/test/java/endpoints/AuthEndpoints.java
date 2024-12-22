@@ -39,7 +39,6 @@ public class AuthEndpoints {
         String url = getValue().getString("userRegistrationUrl");
         Response response = RestAssured.given()
                 .filter(filter)
-                .given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .body(auth)
@@ -53,7 +52,6 @@ public class AuthEndpoints {
     public void postLoginUser() {
         String url = getValue().getString("userLoginUrl");
         Response response = RestAssured.given()
-                .given()
                 .filter(filter)
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
@@ -61,7 +59,6 @@ public class AuthEndpoints {
                 .when()
                 .post(url);
         response.then().log().body();
-        System.out.println("Kuehnya => " + filter);
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
@@ -70,9 +67,8 @@ public class AuthEndpoints {
         String url = getValue().getString("updateProfileUrl");
         File img = new File("src/test/resources/image/garuda biru.jpg");
         Response response = RestAssured.given()
-                .given()
                 .filter(filter)
-                .multiPart("user[name]", "Peringatan Darurat")
+                .multiPart("user[name]", "Peringatan DaruratWWW")
                 .multiPart("user[phone_number]", "082727272")
                 .multiPart("user[address]", "Jl. Monogl 3")
                 .multiPart("user[city]", 2)
@@ -80,7 +76,6 @@ public class AuthEndpoints {
                 .when()
                 .put(url);
         response.then().log().body();
-        System.out.println("Kuehnya => " + filter);
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
@@ -88,11 +83,9 @@ public class AuthEndpoints {
     public void getProfile() {
         String url = getValue().getString("getProfileUrl");
         Response response = RestAssured.given()
-                .given()
                 .filter(filter)
                 .get(url);
         response.then().log().body();
-        System.out.println("Kuehnya => " + filter);
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 }
