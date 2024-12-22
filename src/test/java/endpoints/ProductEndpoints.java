@@ -54,4 +54,14 @@ public class ProductEndpoints {
         response.then().log().body();
         Assert.assertEquals(response.getStatusCode(), 200);
     }
+
+    @Test(priority = 2)
+    public void getProductbyId() {
+        String url = getValue().getString("getProductByIdUrl");
+        Response response = RestAssured.given()
+                .pathParam("id", 136451)
+                .get(url);
+        response.then().log().body();
+        Assert.assertEquals(response.getStatusCode(), 200);
+    }
 }
