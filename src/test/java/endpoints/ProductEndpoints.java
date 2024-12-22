@@ -72,7 +72,7 @@ public class ProductEndpoints {
     public void updateProduct() {
         File img = new File("src/test/resources/image/gorengan.jpg");
 
-        String url = getValue().getString("update ProductUrl");
+        String url = getValue().getString("updateProductUrl");
         Response response = RestAssured.given()
                 .pathParam("id", product_id)
                 .filter(auth.getSession())
