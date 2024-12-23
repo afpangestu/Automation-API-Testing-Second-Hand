@@ -25,7 +25,7 @@ public class ProductEndpoints {
         auth = new Authentication();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, groups = {"seller"})
     public void postProduct() {
         File img1 = new File("src/test/resources/image/klepon1.png");
         File img2 = new File("src/test/resources/image/garuda biru.jpg");
@@ -48,7 +48,7 @@ public class ProductEndpoints {
         Assert.assertEquals(response.getStatusCode(), 201);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, groups = {"seller"})
     public void getProduct() {
         String url = getValue().getString("getProductUrl");
         Response response = RestAssured.given()
@@ -58,7 +58,7 @@ public class ProductEndpoints {
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, groups = {"seller"})
     public void getProductbyId() {
         String url = getValue().getString("getProductByIdUrl");
         Response response = RestAssured.given()
@@ -68,7 +68,7 @@ public class ProductEndpoints {
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, groups = {"seller"})
     public void updateProduct() {
         File img = new File("src/test/resources/image/gorengan.jpg");
 
