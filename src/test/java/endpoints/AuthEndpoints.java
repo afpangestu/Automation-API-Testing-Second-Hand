@@ -1,5 +1,6 @@
 package endpoints;
 
+import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.filter.cookie.CookieFilter;
 import io.restassured.http.ContentType;
@@ -18,24 +19,28 @@ public class AuthEndpoints {
     AuthItem authItem;
     Auth auth;
     CookieFilter filter;
+    Faker faker;
 
     // get value from properties file
     static ResourceBundle getValue() {
         return ResourceBundle.getBundle("routes");
     }
 
-    @BeforeClass
+    @BeforeClass(groups = {"smoke", "regression", "seller", "buyer"})
     public void setup() {
         filter = new CookieFilter();
         authItem = new AuthItem();
-        authItem.setName("aji f p");
-        authItem.setEmail("ajimail@mail.com");
-        authItem.setPassword("ajifp123");
+        faker = new Faker();
+
+        authItem.setName(faker.name().fullName());
+        authItem.setEmail(faker.internet().emailAddress());
+        authItem.setPassword(faker.internet().password(1, 8));
+
         auth = new Auth();
         auth.setUser(authItem);
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, groups = {"seller", "smoke"})
     public void postRegisterUser() {
         String url = getValue().getString("userRegistrationUrl");
         Response response = RestAssured.given()
@@ -55,7 +60,7 @@ public class AuthEndpoints {
         }
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, groups = {"smoke", "regression", "seller", "buyer"})
     public void postLoginUser() {
         String url = getValue().getString("userLoginUrl");
         Response response = RestAssured.given()
@@ -69,7 +74,7 @@ public class AuthEndpoints {
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, groups = {"smoke", "regression", "seller", "buyer"})
     public void putUpdateProfile() {
         String url = getValue().getString("updateProfileUrl");
         File img = new File("src/test/resources/image/garuda biru.jpg");
@@ -86,7 +91,7 @@ public class AuthEndpoints {
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, groups = {"smoke", "regression", "seller", "buyer"})
     public void getProfile() {
         String url = getValue().getString("getProfileUrl");
         Response response = RestAssured.given()
