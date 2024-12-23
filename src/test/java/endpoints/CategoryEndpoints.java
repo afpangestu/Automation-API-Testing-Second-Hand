@@ -15,7 +15,7 @@ public class CategoryEndpoints {
         return ResourceBundle.getBundle("routes");
     }
 
-    @Test
+    @Test(groups = {"smoke", "regression"})
     public void getCategory() {
         String url = getValue().getString("getCategoryUrl");
         Response response = RestAssured.given()
@@ -25,7 +25,7 @@ public class CategoryEndpoints {
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void getCategoryById() {
         String url = getValue().getString("getCategoryByIdUrl");
         Response response = RestAssured.given()
