@@ -18,7 +18,7 @@ public class OfferEndpoints {
         return ResourceBundle.getBundle("routes");
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, groups = {"smoke, regression, buyer"})
     public void postOffer() {
         item = new OfferItem();
         offer = new Offer();
@@ -36,7 +36,7 @@ public class OfferEndpoints {
         Assert.assertEquals(response.getStatusCode(),201);
     }
 
-    @Test
+    @Test(priority = 2)
     public void getOffer() {
         String url = getValue().getString("getOfferUrl");
         Response response = RestAssured.given()
