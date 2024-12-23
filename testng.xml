@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name="Seller - API Testing Second Hand">
+        <groups>
+            <run>
+                <include name="seller"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="endpoints.AuthEndpoints"/>
+            <class name="endpoints.ProductEndpoints"/>
+        </classes>
+    </test>
+</suite>
