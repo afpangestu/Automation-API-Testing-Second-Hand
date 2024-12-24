@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test name="Seller - API Testing Second Hand">
+    <test name="Seller - Login and POST Product - API Testing Second Hand">
         <groups>
             <run>
                 <include name="seller"/>
@@ -10,6 +10,30 @@
         <classes>
             <class name="endpoints.AuthEndpoints"/>
             <class name="endpoints.ProductEndpoints"/>
+        </classes>
+    </test>
+
+    <test name="Buyer - Create Account and Post Offer - API Testing Second Hand">
+        <groups>
+            <run>
+                <include name="buyer"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="endpoints.AuthEndpoints"/>
+            <class name="endpoints.OfferEndpoints"/>
+        </classes>
+    </test>
+
+    <test name="Seller - Update Offer - API Testing Second Hand">
+        <groups>
+            <run>
+                <include name="seller"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="endpoints.AuthEndpoints"/>
+            <class name="endpoints.OfferEndpoints"/>
         </classes>
     </test>
 </suite>
