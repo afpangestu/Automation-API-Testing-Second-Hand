@@ -12,9 +12,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pojo.Offer;
 import pojo.OfferItem;
+import utility.JsonManager;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
@@ -77,9 +77,7 @@ public class OfferEndpoints {
         JsonPath jP = response.jsonPath();
         offer_id = jP.getInt("offer.id");
         offerid.put("offer_id", offer_id);
-        FileWriter file = new FileWriter("src/test/java/credentials/offer.json");
-        file.write(offerid.toString());
-        file.close();
+        JsonManager.jsonSave(offerid, "offer.json");
     }
 
     @Test(priority = 2, groups = {"seller"})

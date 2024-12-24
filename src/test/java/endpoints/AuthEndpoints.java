@@ -12,9 +12,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pojo.Auth;
 import pojo.AuthItem;
+import utility.JsonManager;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
@@ -61,14 +61,12 @@ public class AuthEndpoints {
         if (res.get("user.email") != authItem.getEmail() && res.get("user.email") != null) { // if email not exists
             Assert.assertEquals(res.get("user.name"), authItem.getName());
             Assert.assertEquals(response.getStatusCode(), 200);
-            // save cookie to json file
+            // save user information to json file
             cookie = response.getCookie("_binar_playground_secondhand_marketplace_session");
             data.put("buyer_id", res.getInt("user.id"));
             data.put("buyer_name", res.getString("user.name"));
             data.put("token_buyer", cookie);
-            FileWriter file = new FileWriter("src/test/java/credentials/buyer.json");
-            file.write(data.toString());
-            file.close();
+            JsonManager.jsonSave(data, "buyer.json");
         } else {
             Assert.assertEquals(res.get("errors.email[0]"), "has already been taken");
         }
@@ -139,8 +137,6 @@ public class AuthEndpoints {
         data.put("seller_id", res.getInt("user.id"));
         data.put("seller_name", res.getString("user.name"));
         data.put("token_seller", cookie);
-        FileWriter file = new FileWriter("src/test/java/credentials/seller.json");
-        file.write(data.toString());
-        file.close();
+        JsonManager.jsonSave(data, "seller.json");
     }
 }

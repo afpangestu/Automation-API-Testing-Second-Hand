@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import utility.JsonManager;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -51,15 +52,13 @@ public class ProductEndpoints {
                 .when()
                 .post(url);
         response.then().log().body();
-        JsonPath jP = response.jsonPath();
-        product_id = jP.getInt("product.id");
         Assert.assertEquals(response.getStatusCode(), 201);
 
         // save product id to json file
+        JsonPath jP = response.jsonPath();
+        product_id = jP.getInt("product.id");
         data.put("product_id", product_id);
-        FileWriter file = new FileWriter("src/test/java/credentials/product.json");
-        file.write(data.toString());
-        file.close();
+        JsonManager.jsonSave(data, "product.json");
     }
 
     @Test(priority = 2, groups = {"seller"})
