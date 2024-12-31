@@ -1,7 +1,7 @@
 # API AUTOMATION TESTING - SECOND HAND
 ### ⚙️🛠 Automated API testing for Second Hand with Test Cases, Bug Reports, CI/CD GitHub Action Integration 🛠⚙️
 
-📢 This repository contains an automated testing project for Swag Labs using Java, REST Assured, Maven, TestNG, and IntelliJ IDE. The tests are designed to cover various scenarios on the Second Hand API Endpoints (https://secondhand.binaracademy.org/api-docs/index.html).
+📢 This repository contains an automated testing project for Second Hand API Endpoints using Java, REST Assured, Maven, TestNG, and IntelliJ IDE. The tests are designed to cover various scenarios on the Second Hand API Endpoints (https://secondhand.binaracademy.org/api-docs/index.html).
 
 ## Table of Contents
 
