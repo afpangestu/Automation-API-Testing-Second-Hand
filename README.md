@@ -38,7 +38,7 @@ The project covers the following areas of the Second Hand Endpoints:
 
 ## Tools and Technologies Used
 
-This test automation project for Swag Labs utilizes a variety of tools and technologies to streamline the testing process and ensure efficient and accurate results.
+This test automation project for Second Hand API utilizes a variety of tools and technologies to streamline the testing process and ensure efficient and accurate results.
 
 - **Java**: The primary programming language used for writing the test automation code.
 
@@ -57,7 +57,7 @@ These technologies are combined to create an effective testing framework that au
 
 ## Test Cases
 
-The test cases are written in third-party platform using [Qase](https://qase.io/). Each test case covers various aspects of the Swag Labs website, ensuring comprehensive coverage.
+The test cases are written in third-party platform using [Qase](https://qase.io/). Each test case covers various aspects of the Second Hand API, ensuring comprehensive coverage.
 
 ## Installation
 
